@@ -8,6 +8,7 @@ let apiKey = process.env.REACT_APP_NEWS_API_KEY
 export function SearchArticleProvider(props) {
     let [searchItem, setSearchItem] = useState('')
     let [articles, setArticles] = useState([])
+    let [sortBy,setSortBy] = useState('relevancy')
     useEffect(() => {
         if(searchItem.length) {
             let fetchParams = () => {
@@ -15,7 +16,7 @@ export function SearchArticleProvider(props) {
                     q : searchItem,
                     qInTitle : searchItem, 
                     apiKey : apiKey,
-                    sortBy: "relevance",
+                    sortBy: sortBy,
                     pageSize: 50
                 }
             }
@@ -32,9 +33,9 @@ export function SearchArticleProvider(props) {
                 console.log(error)
             }
         }
-    },[searchItem])
+    },[searchItem,sortBy])
     return(
-        <SearchArticleContext.Provider value={{searchItem,setSearchItem}}>
+        <SearchArticleContext.Provider value={{searchItem,setSearchItem,setSortBy}}>
             <SearchArticlesContext.Provider value={{articles,setArticles}}>
                 {props.children}
             </SearchArticlesContext.Provider>

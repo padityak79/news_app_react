@@ -9,6 +9,7 @@ import NewsIcon from '@material-ui/icons/LibraryBooksTwoTone'
 import { Link, withRouter} from 'react-router-dom'
 import { SearchArticleContext } from "./Contexts/SearchArticlesContext.js"
 import {SearchArticlesContext} from './Contexts/SearchArticlesContext'
+import SortByDialog from './sortByDialog.js'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: fade(theme.palette.common.white, 0.25),
       },
       marginLeft: 0,
+      display: "flex",
       width: '100%',
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
@@ -114,20 +116,21 @@ function SearchAppBar(props) {
                 <Link to='/'>NEWS LIGHT <NewsIcon/></Link>
                 </Typography>
                 <form className={classes.search} onSubmit={handleSubmit}>
-                    <div className={classes.searchIcon}>
-                    <SearchIcon />
-                    </div>
-                    <InputBase
-                    value={value}
-                    placeholder="Search Here.."
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    onChange={onChange}
-                    />
+                  <div className={classes.searchIcon}>
+                  <SearchIcon />
+                  </div>
+                  <InputBase
+                  value={value}
+                  placeholder="Search Here.."
+                  classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                  onChange={onChange}
+                  />
                 </form>
+                <SortByDialog />
             </Toolbar>
         </AppBar>
         </div>
