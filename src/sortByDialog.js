@@ -1,6 +1,7 @@
 import React, {useState ,useEffect,useContext} from 'react'
 import {withRouter} from 'react-router-dom'
 import { SearchArticleContext } from "./Contexts/SearchArticlesContext.js"
+import { SearchArticlesContext } from "./Contexts/SearchArticlesContext.js"
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -94,6 +95,7 @@ function SortByDialog(props) {
   const classes = useStyles()
   const {location} = props
   const {setSortBy} = useContext(SearchArticleContext)
+  const {setArticles} = useContext(SearchArticlesContext)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -101,6 +103,7 @@ function SortByDialog(props) {
   const handleClose = (value) => {
     if(value !== selectedValue) {
         const key = sortKeys.filter(k => k.includes(value.split(' ')[0]))
+        setArticles([])
         setSortBy(key)
     }
     setOpen(false);
